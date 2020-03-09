@@ -22,8 +22,7 @@ jobs:
     - name: dump context
       env:
         CONTEXT_CONTENTS: ${{toJson(github)}}
-      run: |
-        echo $CONTEXT_CONTENTS
+      run: echo "$CONTEXT_CONTENTS"
 
     - uses: weirdan/create-deployment-action@master
       id: deployment
