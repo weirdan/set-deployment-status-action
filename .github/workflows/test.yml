@@ -37,7 +37,7 @@ jobs:
         token: ${{github.token}}
         deployment_id: ${{steps.deployment.outputs.deployment_id}}
         state: success
-        log_url: "https://github.com/${{github.repository}}/runs/${{github.run_id}}"
+        log_url: "https://github.com/${{github.repository}}/commit/${{github.event.pull_request.head.sha || github.sha}}/checks"
         description: Successfully deployed to staging
         environment_url: https://staging.dev/
         auto_inactive: true
