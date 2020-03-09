@@ -18,6 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+
+    - name: dump context
+      env:
+        CONTEXT_CONTENTS: ${{toJson(github)}}
+      run: |
+        echo $CONTEXT_CONTENTS
+
     - uses: weirdan/create-deployment-action@master
       id: deployment
       with:
