@@ -1,10 +1,39 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: Set GitHub deployment status
+description: Updates GitHub deployment status
+author: Bruce Weirdan
+branding:
+  icon: upload-cloud
+  color: green
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  token:
+    required: true
+    description: GitHub repository-scoped token
+  deployment_id:
+    required: true
+    description: Deployment to update
+  state:
+    required: true
+    description: The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued`, `pending`, or `success`
+  log_url:
+    required: false
+    description: The full URL of the deployment's output
+    default: ""
+  description:
+    required: false
+    description: A short description of the status. The maximum description length is 140 characters.
+    default: ""
+  environment:
+    required: false
+    description: Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`.
+  environment_url:
+    required: false
+    description: Sets the URL for accessing your environment
+    default: ""
+  auto_inactive:
+    required: false
+    description: Adds a new inactive status to all prior non-transient, non-production environment deployments with the same repository and environment name as the created status's deployment. An inactive status is only added to deployments that had a success state.
+    default: "true"
+
 runs:
   using: 'node12'
   main: 'dist/index.js'

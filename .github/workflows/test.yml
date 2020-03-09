@@ -18,6 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: weirdan/create-deployment-action@master
+      id: deployment
+      with:
+        token: ${{github.token}}
+        required_contexts: "[]"
+        ref: ${{github.ref}}
+        auto_merge: false
     - uses: ./
-      with: 
-        milliseconds: 1000
+      with:
+        token: ${{github.token}}
+        deployment_id: ${{steps.deployment.outputs.deployment_id}}
+        state: success
+        log_url: "https://github.com/${{github.repository}}/runs/${{github.run_id}}"
+        description: Deployment to staging
+        environment: staging
+        environment_url: https://staging.dev/
+        auto_inactive: true
