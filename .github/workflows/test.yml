@@ -23,7 +23,7 @@ jobs:
       with:
         token: ${{github.token}}
         required_contexts: "[]"
-        ref: ${{github.ref}}
+        ref: ${{github.head_ref || github.ref }}
         auto_merge: false
     - uses: ./
       with:
