@@ -27,14 +27,14 @@ jobs:
     - uses: weirdan/create-deployment-action@master
       id: deployment
       with:
-        token: ${{github.token}}
+        token: ${{ secrets.GH_PROJECT_TOKEN }}
         required_contexts: "[]"
         ref: ${{github.head_ref || github.ref }}
         auto_merge: false
         environment: staging
     - uses: ./
       with:
-        token: ${{github.token}}
+        token: ${{ secrets.GH_PROJECT_TOKEN }}
         deployment_id: ${{steps.deployment.outputs.deployment_id}}
         state: success
         log_url: "https://github.com/${{github.repository}}/commit/${{github.event.pull_request.head.sha || github.sha}}/checks"
